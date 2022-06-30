@@ -8,6 +8,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean continueFlg = true;
         MonthlyReport monthlyReport = new MonthlyReport();
+        YearlyReport yearlyReport = new YearlyReport();
+        int monthStart = 1;
+        int monthCount = 3;
+        int yearToWatch = 2022;
 
         System.out.println("""
                 Доступные команды:\s
@@ -28,17 +32,27 @@ public class Main {
                 switch (userInput) {
                     case 1 -> {
                         System.out.println("Считать все месячные отчеты...");
-                        for (int i = 1; i <= 12; i++) {
+                        for (int i = monthStart; i <= monthCount; i++) {
                             String formattedMonth = String.format("%02d", i);
-                            String result = ParseData.readFileContent("data/m.2022" + formattedMonth + ".csv");
+                            String result = ParseData.readFileContent("data/m." +
+                                    yearToWatch + formattedMonth + ".csv");
                             if (result != null) {
                                 monthlyReport.addMonth(i, ParseData.parseMonthFileContent(result));
                             }
                         }
                     }
-                    case 2 -> System.out.println("Счиатать годовой отчет...");
+                    case 2 -> {
+                        System.out.println("Счиатать годовой отчет...");
+                        String result = ParseData.readFileContent("data/y."+yearToWatch+".csv");
+                        if(result != null){
+                            yearlyReport.addYear(yearToWatch, ParseData.parseYearFileContent(result));
+                        }
+                    }
                     case 3 -> System.out.println("Сверить отчеты...");
-                    case 4 -> System.out.println("Вывести информацию о всех месячных отчетах...");
+                    case 4 -> {
+                        System.out.println("Вывести информацию о всех месячных отчетах...");
+                        monthlyReport.analyzeReports();
+                    }
                     case 5 -> System.out.println("Вывести информацию о годовом отчете...");
                     case 0 -> {
                         continueFlg = false;

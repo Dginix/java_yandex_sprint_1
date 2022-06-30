@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * @implNote Класс для для чтения и парсинга данных из файла
  */
 public class ParseData {
-
     static ArrayList<MonthData> parseMonthFileContent(String content){
         String[] lines = content.split("\\n");
         ArrayList<MonthData> resultList = new ArrayList<>();
@@ -21,7 +20,16 @@ public class ParseData {
         }
         return resultList;
     }
-
+    static ArrayList<YearData> parseYearFileContent(String content) {
+        String[] lines = content.split("\\n");
+        ArrayList<YearData> resultList = new ArrayList<>();
+        for (int i = 1; i < lines.length; i++) {
+            String[] lineContent = lines[i].split(",");
+            resultList.add(new YearData(Integer.parseInt(lineContent[0]), Double.parseDouble(lineContent[1]),
+                    Boolean.parseBoolean(lineContent[2])));
+        }
+        return resultList;
+    }
     static String readFileContent(String path){
         try {
             return Files.readString(Path.of(path));

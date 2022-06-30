@@ -10,12 +10,16 @@ import java.util.ArrayList;
  */
 public class ParseData {
 
-    static void parseFileContent(String content){
+    static ArrayList<MonthData> parseMonthFileContent(String content){
         String[] lines = content.split("\\n");
-        for(String line : lines){
-            String[] lineContent = line.split(",");
-            System.out.println(lineContent);
+        ArrayList<MonthData> resultList = new ArrayList<>();
+
+        for(int i = 1; i < lines.length; i++){
+            String[] lineContent = lines[i].split(",");
+            resultList.add(new MonthData(lineContent[0], Boolean.parseBoolean(lineContent[1]),
+                    Long.parseLong(lineContent[2]), Double.parseDouble(lineContent[3])));
         }
+        return resultList;
     }
 
     static String readFileContent(String path){
@@ -27,5 +31,4 @@ public class ParseData {
             return null;
         }
     }
-
 }

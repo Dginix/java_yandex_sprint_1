@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @implNote Создает и хранит отчет за год
  */
 public class YearlyReport {
-    ArrayList<YearData> data;
+    public ArrayList<YearData> data;
     int year;
     public void addYear(int year, ArrayList<YearData> data){
         this.data = data;

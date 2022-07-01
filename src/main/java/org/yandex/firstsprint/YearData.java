@@ -5,8 +5,11 @@ package org.yandex.firstsprint;
  */
 
 public class YearData {
+    /** месяц */
     int month;
+    /** сумма */
     double amount;
+    /** является ли значение тратой */
     boolean isExpense;
 
     public YearData(int month, double amount, boolean isExpense){

@@ -7,8 +7,10 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         boolean continueFlg = true;
+
         MonthlyReport monthlyReport = new MonthlyReport();
         YearlyReport yearlyReport = new YearlyReport();
+
         int monthStart = 1;
         int monthCount = 3;
         int yearToWatch = 2022;
@@ -40,6 +42,7 @@ public class Main {
                                 monthlyReport.addMonth(i, ParseData.parseMonthFileContent(result));
                             }
                         }
+                        monthlyReport.analyzeReports();
                     }
                     case 2 -> {
                         System.out.println("Счиатать годовой отчет...");
@@ -48,10 +51,18 @@ public class Main {
                             yearlyReport.addYear(yearToWatch, ParseData.parseYearFileContent(result));
                         }
                     }
-                    case 3 -> System.out.println("Сверить отчеты...");
+                    case 3 -> {
+                        System.out.println("Сверить отчеты...");
+                        if(!yearlyReport.data.isEmpty() && !monthlyReport.data.isEmpty()){
+                            CompareReport compareReport = new CompareReport(monthlyReport.data, yearlyReport.data,
+                                    monthlyReport.dataSum);
+                            compareReport.getReport();
+                        }
+                        else System.out.println("Один из отчетов не загружен!");
+                    }
                     case 4 -> {
                         System.out.println("Вывести информацию о всех месячных отчетах...");
-                        monthlyReport.analyzeReports();
+                        monthlyReport.gerReport();
                     }
                     case 5 -> {
                         System.out.println("Вывести информацию о годовом отчете...");

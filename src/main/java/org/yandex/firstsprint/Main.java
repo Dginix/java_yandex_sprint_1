@@ -53,7 +53,10 @@ public class Main {
                         System.out.println("Вывести информацию о всех месячных отчетах...");
                         monthlyReport.analyzeReports();
                     }
-                    case 5 -> System.out.println("Вывести информацию о годовом отчете...");
+                    case 5 -> {
+                        System.out.println("Вывести информацию о годовом отчете...");
+                        yearlyReport.analyzeReports();
+                    }
                     case 0 -> {
                         continueFlg = false;
                         System.out.println("Выход из программы...");
